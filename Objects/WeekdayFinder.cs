@@ -7,8 +7,8 @@ namespace WeekdayFinder.Objects
   {
     private string _dayOfTheWeek;
     private string _userInput;
-    private List<string> _weekDays = new List<string> {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
-    private int _epochDate = 2001;
+    private List<string> _weekDays = new List<string> {"Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
+    private int _epochDate = 2000;
     private string[] _parsedInput;
     private Dictionary<int, int> _months = new Dictionary<int, int>
     {
@@ -31,6 +31,7 @@ namespace WeekdayFinder.Objects
       _userInput = UserInput;
     }
 
+
     public List<int> ParsedInput()
     {
       _parsedInput = _userInput.Split('/');
@@ -48,11 +49,46 @@ namespace WeekdayFinder.Objects
         int yearCount = (intList[2] - _epochDate) * 365;
         int dayCount = intList[1];
         int monthCount = _months[intList[0]];
-
+        int number;
         int total = yearCount + dayCount + monthCount;
-        int number = total % 7;
+        int daysToAdd;
+
+
+        if(IsLeapYear(intList[2]))
+        {
+          int distanceFromEpoch = intList[2] - 2000;
+          int numberOfLeapYears = distanceFromEpoch / 4;
+          daysToAdd = numberOfLeapYears;
+          if(intList[0] >= 2 && intList[1] > 28)
+          {
+            daysToAdd = numberOfLeapYears + 1;
+            total += daysToAdd;
+            number = total % 7;
+            Console.WriteLine(number);
+            return number;
+          }
+          total += daysToAdd;
+          number = total % 7;
+          Console.WriteLine(number);
+        }
+        number = total % 7;
         Console.WriteLine(number);
         return number;
+    }
+    public bool IsLeapYear(int Year)
+    {
+      if(Year % 400 == 0)
+      {
+        return true;
+      }
+      else if(Year % 100 == 0)
+      {
+        return false;
+      }
+      else
+      {
+        return Year % 4 == 0;
+      }
     }
   }
 }
