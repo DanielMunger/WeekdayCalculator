@@ -52,43 +52,23 @@ namespace WeekdayFinder.Objects
         int number;
         int total = yearCount + dayCount + monthCount;
         int daysToAdd;
-
-
-        if(IsLeapYear(intList[2]))
+        int distanceFromEpoch = intList[2] - 2000;
+        int numberOfLeapYears = distanceFromEpoch / 4;
+        daysToAdd = numberOfLeapYears;
+        Console.WriteLine(daysToAdd);
+        if(intList[0] <= 2)
         {
-          int distanceFromEpoch = intList[2] - 2000;
-          int numberOfLeapYears = distanceFromEpoch / 4;
-          daysToAdd = numberOfLeapYears;
-          if(intList[0] >= 2 && intList[1] > 28)
-          {
-            daysToAdd = numberOfLeapYears + 1;
-            total += daysToAdd;
-            number = total % 7;
-            Console.WriteLine(number);
-            return number;
-          }
+          daysToAdd = numberOfLeapYears - 1;
           total += daysToAdd;
           number = total % 7;
-          Console.WriteLine(number);
+          Console.WriteLine("hello");
+          return number;
         }
+        total += daysToAdd;
+        number = total % 7;
         number = total % 7;
         Console.WriteLine(number);
         return number;
-    }
-    public bool IsLeapYear(int Year)
-    {
-      if(Year % 400 == 0)
-      {
-        return true;
-      }
-      else if(Year % 100 == 0)
-      {
-        return false;
-      }
-      else
-      {
-        return Year % 4 == 0;
-      }
     }
   }
 }
