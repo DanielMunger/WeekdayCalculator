@@ -7,8 +7,8 @@ namespace WeekdayFinder.Objects
   {
     private string _dayOfTheWeek;
     private string _userInput;
-    private List<string> _weekDays = new List<string> {"Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
-    private int _epochDate = 2000;
+    private List<string> _weekDays = new List<string> {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+    private int _epochDate = 1000;
     private string[] _parsedInput;
     private Dictionary<int, int> _months = new Dictionary<int, int>
     {
@@ -52,7 +52,7 @@ namespace WeekdayFinder.Objects
         int number;
         int total = yearCount + dayCount + monthCount;
         int daysToAdd;
-        int distanceFromEpoch = intList[2] - 2000;
+        int distanceFromEpoch = intList[2] - _epochDate;
         int numberOfLeapYears = distanceFromEpoch / 4;
         daysToAdd = numberOfLeapYears;
         Console.WriteLine(daysToAdd);

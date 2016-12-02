@@ -17,8 +17,8 @@ namespace DateFinderTest
     [Fact]
     public void DateValue_Test()
     {
-      int result = 2;
-      Finder newDate = new Finder("3/23/2076");
+      int result = 0;
+      Finder newDate = new Finder("1/1/1000");
       Assert.Equal(result, newDate.DateConverter());
     }
   }
